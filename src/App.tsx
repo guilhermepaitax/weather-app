@@ -7,11 +7,14 @@ import { Routes } from './routes'
 import { store } from './store'
 import { theme } from './styles/theme'
 
+import { Modal } from './components/molecules/Modal'
+
 export const App = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>
         <ChakraProvider theme={theme}>
+          <Modal />
           <Routes />
         </ChakraProvider>
       </Provider>
