@@ -10,17 +10,19 @@ const styles = {
   })
 }
 
-// #161a20
-
 export const theme = extendTheme({
   colors: {
     gray: {
+      200: '#F4F8FB',
       800: '#23292E',
       900: '#161a20'
     },
     blue: {
       500: '#3B5BFD'
     }
+  },
+  shadows: {
+    outline: '0 0 0 3px rgba(98, 93, 245, 0.5)'
   },
   styles,
   fonts: {
