@@ -28,7 +28,7 @@ export const RecentSearches = () => {
       <Text fontSize={18} fontWeight="500" mb={4}>
         Recent Searches
       </Text>
-      {recentSearch?.length > 1 ? (
+      {recentSearch?.length > 0 ? (
         <>
           <Divider my={4} />
           <ActionList

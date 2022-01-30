@@ -31,11 +31,14 @@ export const NoDataCard = () => {
       bgImage={`url(${imgNightStorm})`}
       backgroundSize={{
         md: '55%',
-        base: '70%'
+        base: '120%'
       }}
       flexDirection="column"
       backgroundRepeat="no-repeat"
-      backgroundPosition="100% 50%"
+      backgroundPosition={{
+        md: '100% 50%',
+        base: '-250%'
+      }}
     >
       <Text
         color="yellow.400"
