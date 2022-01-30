@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { RootState } from '..'
 
 import api from '../../services/api'
+
+import { getSufix } from './utils'
 
 import {
   IWeather,
@@ -12,17 +15,39 @@ import {
 export const getWeather = createAsyncThunk<
   IWeatherData,
   IWeatherParameters,
-  { rejectValue: IWeatherError }
->('weather/getWeather', async (parameters, { rejectWithValue }) => {
+  { rejectValue: IWeatherError; state: RootState }
+>('weather/getWeather', async (parameters, { rejectWithValue, getState }) => {
   try {
-    const response = await api.get('/weather', {
+    const { lang, units } = getState().settings
+
+    const response = await api.get<IWeatherData>('/weather', {
       params: {
         appid: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
-        ...parameters
+        ...parameters,
+        lang,
+        units
       }
     })
 
     const data = response.data
+
+    if (data?.main?.temp) data.main.temp = Math.round(data.main.temp)
+
+    if (data?.main) {
+      data.mainFormatted = {
+        temp: `${Math.round(data.main.temp)}${getSufix(units)}`,
+        feels_like: `${Math.round(data.main.feels_like)}${getSufix(units)}`,
+        temp_min: `${Math.round(data.main.temp_min)}${getSufix(units)}`,
+        temp_max: `${Math.round(data.main.temp_max)}${getSufix(units)}`,
+        pressure: `${data.main.pressure} hPa`
+      }
+    }
+
+    data.formattedDate = new Date().toLocaleDateString(lang, {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric'
+    })
 
     return data
   } catch (error: any) {
@@ -40,7 +65,8 @@ export const getWeather = createAsyncThunk<
 const initialState = {
   weather: null,
   error: null,
-  recentSearch: []
+  recentSearch: [],
+  loading: false
 } as IWeather
 
 const weatherSlice = createSlice({
@@ -49,22 +75,27 @@ const weatherSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(getWeather.pending, state => {
+        state.loading = true
+      })
       .addCase(getWeather.fulfilled, (state, action) => {
         state.weather = action.payload
         state.error = null
+        state.loading = false
         if (!state.recentSearch.some(city => city.id === action.payload.id)) {
           state.recentSearch = [
-            ...state.recentSearch,
             {
               id: action.payload.id,
               name: action.payload.name
-            }
+            },
+            ...state.recentSearch
           ]
         }
       })
       .addCase(getWeather.rejected, (state, action) => {
         state.error = action.payload ? action.payload : null
         state.weather = null
+        state.loading = false
       })
   }
 })

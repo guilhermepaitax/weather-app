@@ -6,12 +6,13 @@ export interface IWeatherCity {
 export interface IWeatherData {
   id: number
   name: string
+  formattedDate?: string
   weather: {
     id: number
     main: string
     description: string
     icon: string
-  }
+  }[]
   base: string
   main: {
     temp: number
@@ -20,6 +21,13 @@ export interface IWeatherData {
     temp_max: number
     pressure: number
     humidity: number
+  }
+  mainFormatted?: {
+    temp?: string
+    feels_like?: string
+    temp_min?: string
+    temp_max?: string
+    pressure?: string
   }
   visibility: number
   wind: {
@@ -53,4 +61,5 @@ export interface IWeather {
   weather: IWeatherData | null
   error: IWeatherError | null
   recentSearch: IWeatherCity[]
+  loading: boolean
 }
