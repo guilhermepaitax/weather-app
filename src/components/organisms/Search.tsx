@@ -7,10 +7,11 @@ import { useGeoLocation } from '../../hooks/geoLocation'
 
 import { IWeatherCity, IWeatherParameters } from '../../store/weather/types'
 import { getWeather } from '../../store/weather/weatherSlice'
-import { closeModal } from '../../store/modal/modalSlice'
+import { closeModal, openModal } from '../../store/modal/modalSlice'
 
 import { LargeButton } from '../atoms/LargeButton'
 import { ActionList } from '../molecules/ActionList'
+import { EnableLocation } from '../molecules/EnableLocation'
 
 export const Search = () => {
   const dispatch = useAppDispatch()
@@ -45,10 +46,22 @@ export const Search = () => {
     handleSearch({ q: search })
   }
 
+  const handleErrorOnGetLocation = (code: number) => {
+    if (code === 1) {
+      dispatch(
+        openModal({
+          children: <EnableLocation />,
+          modalProps: {
+            closeButton: true
+          }
+        })
+      )
+    }
+  }
+
   const handleSearchByGeoLocation = () => {
-    console.log(location)
     if (location?.error) {
-      // To do: show error
+      handleErrorOnGetLocation(location?.code || 500)
     } else if (location?.coords) {
       handleSearch({
         lat: location.coords.latitude,
@@ -91,7 +104,12 @@ export const Search = () => {
           </Text>
         )}
 
-        <ActionList data={locations} onClick={handleSearchRecent} />
+        <ActionList
+          data={locations}
+          onClick={handleSearchRecent}
+          maxH={400}
+          overflowY="auto"
+        />
       </Box>
     </Box>
   )
