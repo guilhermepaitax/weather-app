@@ -16,6 +16,7 @@ import { openModal } from '../../store/modal/modalSlice'
 
 import { IconButton } from '../atoms/IconButton'
 import { Search } from './Search'
+import { Settings } from './Settings'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
@@ -25,9 +26,10 @@ export const Header = () => {
   const handleOpenSettings = useCallback(() => {
     dispatch(
       openModal({
-        children: <div>Settings</div>,
+        children: <Settings />,
         modalProps: {
-          isCentered: true
+          closeButton: true,
+          size: 'xl'
         }
       })
     )
