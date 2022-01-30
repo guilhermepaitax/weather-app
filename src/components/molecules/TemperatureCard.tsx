@@ -43,7 +43,7 @@ export const TemperatureCard = () => {
       >
         {isLargerThan1280 ? (
           <MotionImage
-            src={`src/assets/iconsWeather/${
+            src={`assets/iconsWeather/${
               weather?.weather[0]?.icon || '01d'
             }.png`}
             alt="weather image"
@@ -63,7 +63,7 @@ export const TemperatureCard = () => {
           />
         ) : (
           <Image
-            src={`src/assets/iconsWeather/${
+            src={`assets/iconsWeather/${
               weather?.weather[0]?.icon || '01d'
             }.png`}
             alt="weather image"
