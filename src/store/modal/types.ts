@@ -12,6 +12,7 @@ interface IModalProps {
     | '5xl'
     | '6xl'
     | 'full'
+  closeButton?: boolean
 }
 
 export interface IModal {

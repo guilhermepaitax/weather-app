@@ -2,7 +2,8 @@ import { useCallback } from 'react'
 import {
   Modal as ModalChakra,
   ModalOverlay,
-  ModalContent
+  ModalContent,
+  ModalCloseButton
 } from '@chakra-ui/react'
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { closeModal } from '../../store/modal/modalSlice'
@@ -18,7 +19,10 @@ export const Modal = () => {
   return (
     <ModalChakra {...modalProps} isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
-      <ModalContent>{children}</ModalContent>
+      <ModalContent>
+        {modalProps?.closeButton && <ModalCloseButton />}
+        {children}
+      </ModalContent>
     </ModalChakra>
   )
 }
