@@ -34,5 +34,8 @@ export const theme = extendTheme({
   fonts: {
     body: 'Inter, sans-serif',
     heading: 'Inter, sans-serif'
+  },
+  config: {
+    initialColorMode: 'dark'
   }
 })
