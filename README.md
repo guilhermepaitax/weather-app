@@ -27,3 +27,17 @@ Step 4 - To start the application in the development environment, run the `yarn 
 Step 5 - To build your application, run the command `yarn build` and then `yarn preview`.
 
 ## Building the project
+
+I choose to use the Atomic design architecture with atoms, molecules, organisms to organize the components and allow for an easier growing structure.
+To develop this project I used React JS with Typescript and these libraries:
+
+> - [React JS](https://reactjs.org/)
+> - [React Router](https://reactrouter.com/)
+> - [Redux](https://redux.js.org/)
+> - [Chakra-UI](https://chakra-ui.com/)
+> - [Framer-Motion](https://www.framer.com/motion/)
+> - [React-Icons](https://react-icons.github.io/react-icons/)
+
+## Author
+
+Developed by Guilherme Ribeiro Paitax. Any questions or suggestions can be contacted via email guilhermepaitax16@gmail.com
