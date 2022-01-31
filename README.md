@@ -37,6 +37,7 @@ To develop this project I used React JS with Typescript and these libraries:
 > - [Chakra-UI](https://chakra-ui.com/)
 > - [Framer-Motion](https://www.framer.com/motion/)
 > - [React-Icons](https://react-icons.github.io/react-icons/)
+> - [React-i18next](https://react.i18next.com/)
 
 ## Author
 
