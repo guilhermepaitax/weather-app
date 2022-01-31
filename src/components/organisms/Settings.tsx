@@ -10,12 +10,14 @@ import {
   useColorMode
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import { useTranslation } from 'react-i18next'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { setLang, setUnits } from '../../store/settings/settingsSlice'
 import { getWeather } from '../../store/weather/weatherSlice'
 
 export const Settings = () => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { colorMode, setColorMode } = useColorMode()
   const { lang, units } = useAppSelector(state => state.settings)
@@ -41,7 +43,7 @@ export const Settings = () => {
 
   return (
     <Flex pt={10} pb={16} px={8} flexDirection="column">
-      <Heading fontSize={28}>Settings</Heading>
+      <Heading fontSize={28}>{t('Settings')}</Heading>
 
       <Flex
         flexDirection={{
@@ -55,7 +57,7 @@ export const Settings = () => {
         mt={10}
       >
         <Text mr={[0, 4]} mb={[4, 4, 0]} fontSize={18} fontWeight="500">
-          Application Theme
+          {t('Application Theme')}
         </Text>
 
         <Menu>
@@ -82,16 +84,20 @@ export const Settings = () => {
         mt={10}
       >
         <Text mr={[0, 4]} mb={[4, 4, 0]} fontSize={18} fontWeight="500">
-          Application Language
+          {t('Application Language')}
         </Text>
 
         <Menu>
           <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            {lang}
+            {t(lang)}
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => handleChangeLang('en')}>en</MenuItem>
-            <MenuItem onClick={() => handleChangeLang('pt_br')}>pt_br</MenuItem>
+            <MenuItem onClick={() => handleChangeLang('en')}>
+              {t('en')}
+            </MenuItem>
+            <MenuItem onClick={() => handleChangeLang('pt_br')}>
+              {t('pt_br')}
+            </MenuItem>
           </MenuList>
         </Menu>
       </Flex>
@@ -107,22 +113,22 @@ export const Settings = () => {
         mt={10}
       >
         <Text mr={[0, 4]} mb={[4, 4, 0]} fontSize={18} fontWeight="500">
-          Application Units
+          {t('Application Units')}
         </Text>
 
         <Menu>
           <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            {units}
+            {t(units)}
           </MenuButton>
           <MenuList>
             <MenuItem onClick={() => handleChangeUnits('standard')}>
-              standard
+              {t('standard')}
             </MenuItem>
             <MenuItem onClick={() => handleChangeUnits('metric')}>
-              metric
+              {t('metric')}
             </MenuItem>
             <MenuItem onClick={() => handleChangeUnits('imperial')}>
-              imperial
+              {t('imperial')}
             </MenuItem>
           </MenuList>
         </Menu>

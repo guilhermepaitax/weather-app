@@ -1,15 +1,17 @@
 import { useCallback } from 'react'
 import { Text, Button } from '@chakra-ui/react'
-import { Card } from '../atoms/Card'
+import { useTranslation } from 'react-i18next'
 
 import { useAppDispatch } from '../../hooks/redux'
 import { openModal } from '../../store/modal/modalSlice'
 
 import imgWind from '../../assets/img/wind.png'
 
+import { Card } from '../atoms/Card'
 import { Search } from '../organisms/Search'
 
 export const NotFoundCard = () => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const handleSearch = useCallback(() => {
@@ -44,7 +46,7 @@ export const NotFoundCard = () => {
         lineHeight={1.15}
         maxW={350}
       >
-        Sorry, place not found.
+        {t('Sorry, place not found.')}
       </Text>
       <Button
         mt={6}
@@ -57,7 +59,7 @@ export const NotFoundCard = () => {
         _hover={{ bg: 'yellow.600' }}
         _active={{ bg: 'yellow.700' }}
       >
-        Try search for another place
+        {t('Try search for another place')}
       </Button>
     </Card>
   )

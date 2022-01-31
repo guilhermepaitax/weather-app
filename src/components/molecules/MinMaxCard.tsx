@@ -1,11 +1,13 @@
 import { Grid, Flex, Text } from '@chakra-ui/react'
 import { WiThermometerExterior, WiThermometer } from 'react-icons/wi'
+import { useTranslation } from 'react-i18next'
 
 import { useAppSelector } from '../../hooks/redux'
 
 import { Card } from '../atoms/Card'
 
 export const MinMaxCard = () => {
+  const { t } = useTranslation()
   const { weather } = useAppSelector(state => state.weather)
 
   if (!weather) return null
@@ -25,7 +27,7 @@ export const MinMaxCard = () => {
         <Flex flexDirection="column" align="center" justifyContent="center">
           <Flex align="center">
             <WiThermometerExterior color="#3E61FF" size={32} />
-            <Text fontWeight="500">Min</Text>
+            <Text fontWeight="500">{t('Min')}</Text>
           </Flex>
           <Text fontWeight="bold" mt={2} fontSize={28}>
             {weather?.mainFormatted?.temp_min}
@@ -35,7 +37,7 @@ export const MinMaxCard = () => {
         <Flex flexDirection="column" align="center" justifyContent="center">
           <Flex align="center">
             <WiThermometer color="#FF623E" size={32} />
-            <Text fontWeight="500">Max</Text>
+            <Text fontWeight="500">{t('Max')}</Text>
           </Flex>
           <Text fontWeight="bold" mt={2} fontSize={28}>
             {weather?.mainFormatted?.temp_max}
@@ -45,7 +47,7 @@ export const MinMaxCard = () => {
         <Flex flexDirection="column" align="center" justifyContent="center">
           <Flex align="center">
             <WiThermometer size={32} />
-            <Text fontWeight="500">Feels</Text>
+            <Text fontWeight="500">{t('Feels')}</Text>
           </Flex>
           <Text fontWeight="bold" mt={2} fontSize={28}>
             {weather?.mainFormatted?.feels_like}

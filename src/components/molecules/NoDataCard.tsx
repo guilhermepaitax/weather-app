@@ -1,15 +1,17 @@
 import { useCallback } from 'react'
 import { Text, Button } from '@chakra-ui/react'
-import { Card } from '../atoms/Card'
+import { useTranslation } from 'react-i18next'
 
 import { useAppDispatch } from '../../hooks/redux'
 import { openModal } from '../../store/modal/modalSlice'
 
 import imgNightStorm from '../../assets/img/6.png'
 
+import { Card } from '../atoms/Card'
 import { Search } from '../organisms/Search'
 
 export const NoDataCard = () => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const handleSearch = useCallback(() => {
@@ -47,7 +49,7 @@ export const NoDataCard = () => {
         lineHeight={1.15}
         maxW={480}
       >
-        Search, for some place.
+        {t('Search, for some place.')}
       </Text>
       <Button
         mt={6}
@@ -60,7 +62,7 @@ export const NoDataCard = () => {
         _hover={{ bg: 'yellow.600', color: 'yellow.800' }}
         _active={{ bg: 'yellow.700', color: 'yellow.800' }}
       >
-        Click to search
+        {t('Click to search')}
       </Button>
     </Card>
   )

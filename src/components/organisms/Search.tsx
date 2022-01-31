@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, FormEvent } from 'react'
 import { Input, Box, Divider, Text } from '@chakra-ui/react'
 import { MdLocationOn } from 'react-icons/md'
+import { useTranslation } from 'react-i18next'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { useGeoLocation } from '../../hooks/geoLocation'
@@ -14,6 +15,7 @@ import { ActionList } from '../molecules/ActionList'
 import { EnableLocation } from '../molecules/EnableLocation'
 
 export const Search = () => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const [search, setSearch] = useState('')
   const [locations, setLocations] = useState<IWeatherCity[]>([])
@@ -74,7 +76,7 @@ export const Search = () => {
     <Box p={4}>
       <form onSubmit={handleSubmit}>
         <Input
-          placeholder="Search"
+          placeholder={t('Search')}
           variant="filled"
           size="lg"
           rounded="lg"
@@ -94,13 +96,13 @@ export const Search = () => {
           justifyContent="space-between"
           rightIcon={<MdLocationOn size={24} />}
         >
-          Use my Location
+          {t('Use my Location')}
         </LargeButton>
         <Divider my={6} />
 
         {locations.length > 0 && (
           <Text fontSize={16} fontWeight="500" mb={3}>
-            Recent Searches
+            {t('Recent Searches')}
           </Text>
         )}
 

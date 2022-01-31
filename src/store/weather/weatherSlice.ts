@@ -3,7 +3,11 @@ import { RootState } from '..'
 
 import api from '../../services/api'
 
-import { getSuffix, getSuffixSpeed, getLanguage } from './utils'
+import {
+  getSuffix,
+  getSuffixSpeed,
+  getLanguage
+} from '../../utils/formatValues'
 
 import {
   IWeather,

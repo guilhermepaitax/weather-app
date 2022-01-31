@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { FaSun, FaMoon, FaSearch } from 'react-icons/fa'
 import { MdSettings } from 'react-icons/md'
+import { useTranslation } from 'react-i18next'
 
 import { useAppDispatch } from '../../hooks/redux'
 import { openModal } from '../../store/modal/modalSlice'
@@ -19,6 +20,7 @@ import { Search } from './Search'
 import { Settings } from './Settings'
 
 export const Header = () => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { colorMode, toggleColorMode } = useColorMode()
   const bg = useColorModeValue('gray.100', 'whiteAlpha.50')
@@ -59,7 +61,7 @@ export const Header = () => {
         justifyContent="space-between"
         maxW="container.xl"
       >
-        <Text fontWeight={600}>Weather Forecast</Text>
+        <Text fontWeight={600}>{t('Weather Forecast')}</Text>
         <Button
           w={300}
           bg={bg}
@@ -71,7 +73,7 @@ export const Header = () => {
             base: 'none'
           }}
         >
-          Search for a location
+          {t('Search for a location')}
         </Button>
 
         <HStack
@@ -82,7 +84,7 @@ export const Header = () => {
         >
           <IconButton
             iconElement={FaSearch}
-            aria-label="Serach for a location"
+            aria-label={t('Search for a location')}
             onClick={handleOpenSearch}
             display={{
               md: 'none',
@@ -91,12 +93,12 @@ export const Header = () => {
           />
           <IconButton
             iconElement={colorMode === 'dark' ? FaMoon : FaSun}
-            aria-label="Change color mode"
+            aria-label={t('Change color mode')}
             onClick={toggleColorMode}
           />
           <IconButton
             iconElement={MdSettings}
-            aria-label="Open settings"
+            aria-label={t('Open settings')}
             onClick={handleOpenSettings}
           />
         </HStack>

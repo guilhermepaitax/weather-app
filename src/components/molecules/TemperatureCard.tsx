@@ -10,6 +10,7 @@ import {
 import { motion } from 'framer-motion'
 import { WiStrongWind, WiCloud } from 'react-icons/wi'
 import { MdWater } from 'react-icons/md'
+import { useTranslation } from 'react-i18next'
 
 import { useAppSelector } from '../../hooks/redux'
 
@@ -18,6 +19,7 @@ import { Card } from '../atoms/Card'
 export const MotionImage = motion<ImageProps>(Image)
 
 export const TemperatureCard = () => {
+  const { t } = useTranslation()
   const [isLargerThan1280] = useMediaQuery('(min-width: 768px)')
   const { weather } = useAppSelector(state => state.weather)
 
@@ -46,7 +48,7 @@ export const TemperatureCard = () => {
             src={`assets/iconsWeather/${
               weather?.weather[0]?.icon || '01d'
             }.png`}
-            alt="weather image"
+            alt={t('weather image')}
             drag
             w={64}
             right={10}
@@ -66,7 +68,7 @@ export const TemperatureCard = () => {
             src={`assets/iconsWeather/${
               weather?.weather[0]?.icon || '01d'
             }.png`}
-            alt="weather image"
+            alt={t('weather image')}
             w={48}
             mb={4}
           />
@@ -127,7 +129,7 @@ export const TemperatureCard = () => {
             {weather?.mainFormatted?.windSpeed}
           </Text>
           <Text color="GrayText" fontSize={13} fontWeight="500">
-            Wind
+            {t('Wind')}
           </Text>
         </Center>
         <Center flexDirection="column">
@@ -136,7 +138,7 @@ export const TemperatureCard = () => {
             {weather?.main?.humidity}%
           </Text>
           <Text color="GrayText" fontSize={13} fontWeight="500">
-            Humidity
+            {t('Humidity')}
           </Text>
         </Center>
         <Center flexDirection="column">
@@ -145,7 +147,7 @@ export const TemperatureCard = () => {
             {weather?.clouds?.all}%
           </Text>
           <Text color="GrayText" fontSize={13} fontWeight="500">
-            Cloudiness
+            {t('Cloudiness')}
           </Text>
         </Center>
       </HStack>

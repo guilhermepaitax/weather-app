@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { Divider, Text } from '@chakra-ui/react'
+import { useTranslation } from 'react-i18next'
 
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { IWeatherCity } from '../../store/weather/types'
@@ -8,6 +9,7 @@ import { Card } from '../atoms/Card'
 import { ActionList } from '../molecules/ActionList'
 
 export const RecentSearches = () => {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { recentSearch } = useAppSelector(state => state.weather)
 
@@ -26,7 +28,7 @@ export const RecentSearches = () => {
       }}
     >
       <Text fontSize={18} fontWeight="500" mb={4}>
-        Recent Searches
+        {t('Recent Searches')}
       </Text>
       {recentSearch?.length > 0 ? (
         <>
@@ -40,7 +42,7 @@ export const RecentSearches = () => {
         </>
       ) : (
         <Text fontSize={16} color="GrayText" fontWeight="normal" mb={3}>
-          No recent searches
+          {t('No recent searches')}
         </Text>
       )}
     </Card>

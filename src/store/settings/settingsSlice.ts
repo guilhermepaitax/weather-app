@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
+import i18n from 'i18next'
 
 import { ISettings } from './types'
+
+import { getLanguage } from '../../utils/formatValues'
 
 const settingsSlice = createSlice({
   name: 'settings',
@@ -10,6 +13,7 @@ const settingsSlice = createSlice({
   } as ISettings,
   reducers: {
     setLang: (state, action) => {
+      i18n.changeLanguage(getLanguage(action.payload))
       state.lang = action.payload
     },
     setUnits: (state, action) => {

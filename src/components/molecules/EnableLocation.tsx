@@ -1,4 +1,5 @@
 import { Flex, Heading, Text, Image, Button } from '@chakra-ui/react'
+import { useTranslation } from 'react-i18next'
 
 import { useAppDispatch } from '../../hooks/redux'
 import { closeModal } from '../../store/modal/modalSlice'
@@ -7,6 +8,7 @@ import imgEnable from '../../assets/img/enable-location.jpeg'
 
 export const EnableLocation = () => {
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
 
   const handleCloseModal = () => {
     dispatch(closeModal())
@@ -16,10 +18,7 @@ export const EnableLocation = () => {
     <Flex py={10} px={8} flexDirection="column">
       <Heading>Oops!</Heading>
 
-      <Text mt={8}>
-        We need your location to show you the weather. Please enable your
-        location in your browser settings.
-      </Text>
+      <Text mt={8}>{t('We need your location to show you the weather')}</Text>
 
       <Image
         src={imgEnable}
@@ -30,7 +29,7 @@ export const EnableLocation = () => {
       />
 
       <Button onClick={handleCloseModal} mt={5}>
-        Ok, Understood!
+        {t('Ok, Understood!')}
       </Button>
     </Flex>
   )
