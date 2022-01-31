@@ -6,11 +6,39 @@ import {
   Button,
   MenuButton,
   MenuList,
-  MenuItem
+  MenuItem,
+  useColorMode
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { setLang, setUnits } from '../../store/settings/settingsSlice'
+import { getWeather } from '../../store/weather/weatherSlice'
+
 export const Settings = () => {
+  const dispatch = useAppDispatch()
+  const { colorMode, setColorMode } = useColorMode()
+  const { lang, units } = useAppSelector(state => state.settings)
+  const { weather } = useAppSelector(state => state.weather)
+
+  const handleUpdateWeather = () => {
+    dispatch(getWeather({ id: weather?.id }))
+  }
+
+  const handleChangeTheme = (theme: string) => {
+    setColorMode(theme)
+  }
+
+  const handleChangeLang = async (lang: string) => {
+    await dispatch(setLang(lang))
+    handleUpdateWeather()
+  }
+
+  const handleChangeUnits = async (units: string) => {
+    await dispatch(setUnits(units))
+    handleUpdateWeather()
+  }
+
   return (
     <Flex pt={10} pb={16} px={8} flexDirection="column">
       <Heading fontSize={28}>Settings</Heading>
@@ -32,11 +60,13 @@ export const Settings = () => {
 
         <Menu>
           <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            Dark
+            {colorMode}
           </MenuButton>
           <MenuList>
-            <MenuItem>Dark</MenuItem>
-            <MenuItem>Light</MenuItem>
+            <MenuItem onClick={() => handleChangeTheme('dark')}>Dark</MenuItem>
+            <MenuItem onClick={() => handleChangeTheme('light')}>
+              Light
+            </MenuItem>
           </MenuList>
         </Menu>
       </Flex>
@@ -57,11 +87,11 @@ export const Settings = () => {
 
         <Menu>
           <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            Portuguese - BR
+            {lang}
           </MenuButton>
           <MenuList>
-            <MenuItem>English</MenuItem>
-            <MenuItem>Portuguese - BR</MenuItem>
+            <MenuItem onClick={() => handleChangeLang('en')}>en</MenuItem>
+            <MenuItem onClick={() => handleChangeLang('pt_br')}>pt_br</MenuItem>
           </MenuList>
         </Menu>
       </Flex>
@@ -82,12 +112,18 @@ export const Settings = () => {
 
         <Menu>
           <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            Standard
+            {units}
           </MenuButton>
           <MenuList>
-            <MenuItem>Standard</MenuItem>
-            <MenuItem>Metric</MenuItem>
-            <MenuItem>Imperial</MenuItem>
+            <MenuItem onClick={() => handleChangeUnits('standard')}>
+              standard
+            </MenuItem>
+            <MenuItem onClick={() => handleChangeUnits('metric')}>
+              metric
+            </MenuItem>
+            <MenuItem onClick={() => handleChangeUnits('imperial')}>
+              imperial
+            </MenuItem>
           </MenuList>
         </Menu>
       </Flex>

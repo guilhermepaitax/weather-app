@@ -28,6 +28,7 @@ export interface IWeatherData {
     temp_min?: string
     temp_max?: string
     pressure?: string
+    windSpeed?: string
   }
   visibility: number
   wind: {

@@ -124,7 +124,7 @@ export const TemperatureCard = () => {
         <Center flexDirection="column">
           <WiStrongWind size={26} />
           <Text fontSize={13} fontWeight="500">
-            {weather?.wind?.speed} m/s
+            {weather?.mainFormatted?.windSpeed}
           </Text>
           <Text color="GrayText" fontSize={13} fontWeight="500">
             Wind

@@ -5,12 +5,20 @@ import { ISettings } from './types'
 const settingsSlice = createSlice({
   name: 'settings',
   initialState: {
-    theme: 'dark',
     lang: 'en',
     units: 'metric'
   } as ISettings,
-  reducers: {},
+  reducers: {
+    setLang: (state, action) => {
+      state.lang = action.payload
+    },
+    setUnits: (state, action) => {
+      state.units = action.payload
+    }
+  },
   extraReducers: {}
 })
+
+export const { setLang, setUnits } = settingsSlice.actions
 
 export default settingsSlice.reducer

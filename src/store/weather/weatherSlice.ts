@@ -3,7 +3,7 @@ import { RootState } from '..'
 
 import api from '../../services/api'
 
-import { getSufix } from './utils'
+import { getSuffix, getSuffixSpeed, getLanguage } from './utils'
 
 import {
   IWeather,
@@ -35,15 +35,16 @@ export const getWeather = createAsyncThunk<
 
     if (data?.main) {
       data.mainFormatted = {
-        temp: `${Math.round(data.main.temp)}${getSufix(units)}`,
-        feels_like: `${Math.round(data.main.feels_like)}${getSufix(units)}`,
-        temp_min: `${Math.round(data.main.temp_min)}${getSufix(units)}`,
-        temp_max: `${Math.round(data.main.temp_max)}${getSufix(units)}`,
-        pressure: `${data.main.pressure} hPa`
+        temp: `${Math.round(data.main.temp)}${getSuffix(units)}`,
+        feels_like: `${Math.round(data.main.feels_like)}${getSuffix(units)}`,
+        temp_min: `${Math.round(data.main.temp_min)}${getSuffix(units)}`,
+        temp_max: `${Math.round(data.main.temp_max)}${getSuffix(units)}`,
+        pressure: `${data.main.pressure} hPa`,
+        windSpeed: `${data.wind.speed} ${getSuffixSpeed(units)}`
       }
     }
 
-    data.formattedDate = new Date().toLocaleDateString(lang, {
+    data.formattedDate = new Date().toLocaleDateString(getLanguage(lang), {
       weekday: 'long',
       month: 'long',
       day: 'numeric'
